@@ -1,0 +1,11 @@
+a = int(input("Enter first digit: "))
+b = int(input("Enter second digit: "))
+c = int(input("Enter third digit: "))
+
+digits = [a, b, c]
+
+for i in digits:
+    for j in digits:
+        for k in digits:
+            if i != j and j != k and i != k:
+                print(i, j, k)
