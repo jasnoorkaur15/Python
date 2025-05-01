@@ -1,0 +1,46 @@
+# Create an empty phonebook
+phonebook = {}
+
+def add_contact():
+    name = input("Enter name: ")
+    number = input("Enter phone number: ")
+    phonebook[name] = number
+    print("Contact added.")
+
+def remove_contact():
+    name = input("Enter name to remove: ")
+    if name in phonebook:
+        del phonebook[name]
+        print("Contact removed.")
+    else:
+        print("Contact not found.")
+
+def show_contacts():
+    if not phonebook:
+        print("Phonebook is empty.")
+    else:
+        print("Phonebook:")
+        for name, number in phonebook.items():
+            print(name, ":", number)
+
+# Menu to use the functions
+while True:
+    print("\nMenu:")
+    print("1. Add Contact")
+    print("2. Remove Contact")
+    print("3. Show Contacts")
+    print("4. Exit")
+    
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == "1":
+        add_contact()
+    elif choice == "2":
+        remove_contact()
+    elif choice == "3":
+        show_contacts()
+    elif choice == "4":
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Try again.")
