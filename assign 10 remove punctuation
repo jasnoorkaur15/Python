@@ -1,0 +1,10 @@
+import string
+
+text = input("Enter a string: ")
+clean = ""
+
+for char in text:
+    if char not in string.punctuation:
+        clean += char
+
+print("Without punctuation:", clean)
