@@ -1,0 +1,14 @@
+class ComplexNumber:
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def display(self):
+        print(f"{self.real} + {self.imag}i")
+
+# Taking input and using the class
+real_part = float(input("Enter real part: "))
+imag_part = float(input("Enter imaginary part: "))
+
+c = ComplexNumber(real_part, imag_part)
+c.display()
