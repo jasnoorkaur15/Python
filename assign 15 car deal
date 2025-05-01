@@ -1,1 +1,68 @@
+# Define the Car class
+class Car:
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
+
+    def show_info(self):
+        print(f"{self.brand} {self.model} - ₹{self.price}")
+
+# Define the Dealership class
+class Dealership:
+    def __init__(self):
+        self.inventory = []
+
+    def add_car(self, car):
+        self.inventory.append(car)
+
+    def show_inventory(self):
+        if not self.inventory:
+            print("No cars available.")
+        else:
+            print("\nAvailable Cars:")
+            for car in self.inventory:
+                car.show_info()
+
+    def sell_car(self, model_name):
+        for car in self.inventory:
+            if car.model.lower() == model_name.lower():
+                print(f"Sold: {car.brand} {car.model} for ₹{car.price}")
+                self.inventory.remove(car)
+                return
+        print("Car not found.")
+
+# Main program
+dealer = Dealership()
+
+# Adding some default cars
+dealer.add_car(Car("Toyota", "Innova", 1800000))
+dealer.add_car(Car("Honda", "City", 1500000))
+dealer.add_car(Car("Hyundai", "Creta", 1700000))
+
+while True:
+    print("\nCar Dealership Menu:")
+    print("1. Show Cars")
+    print("2. Add Car")
+    print("3. Sell Car")
+    print("4. Exit")
+    
+    choice = input("Enter your choice (1-4): ")
+    
+    if choice == "1":
+        dealer.show_inventory()
+    elif choice == "2":
+        brand = input("Enter car brand: ")
+        model = input("Enter car model: ")
+        price = float(input("Enter car price: "))
+        dealer.add_car(Car(brand, model, price))
+        print("Car added successfully!")
+    elif choice == "3":
+        model_name = input("Enter model name to sell: ")
+        dealer.sell_car(model_name)
+    elif choice == "4":
+        print("Exiting program. Thank you!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
 
