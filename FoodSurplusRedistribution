@@ -1,0 +1,64 @@
+import pandas as pd
+
+data = pd.read_csv("mess.csv")
+
+
+print("Mess Data Loaded Successfully:\n")
+print(data)
+
+def predict_surplus(row):
+    surplus = row['Meals_Prepared'] - row['Students_Present']
+    if surplus > 50:
+        return 'High'
+    elif surplus > 20:
+        return 'Medium'
+    else:
+        return 'Low'
+
+# Apply the prediction logic to each row
+data['Predicted_Surplus'] = data.apply(predict_surplus, axis=1)
+
+
+print("\nSurplus Predictions:")
+print(data[['Day', 'Meals_Prepared', 'Students_Present', 'Predicted_Surplus']])
+
+ngos = [
+    {"name": "Helping Hands", "location": "Sector 17", "contact": "9876543210"},
+    {"name": "Food for All", "location": "MG Road", "contact": "9991112222"},
+    {"name": "Zero Hunger Club", "location": "Camp Area", "contact": "9811122233"},
+]
+
+def suggest_ngos(surplus_level):
+  if surplus_level == "High":
+      return [ngo["name"] for ngo in ngos]  # All NGOs
+  elif surplus_level == "Medium":
+      return [ngos[0]["name"]]  
+  else:
+      return []  # No need to donate
+
+print("\nEnter today's mess details:\n")
+
+meals_prepared = int(input("Meals Prepared: "))
+students_present = int(input("Students Present: "))
+weather = input("Weather (Sunny/Rainy/Cloudy): ")
+festival = input("Is it a festival? (Yes/No): ")
+
+surplus = meals_prepared - students_present
+
+
+if surplus > 50:
+    predicted = "High"
+elif surplus > 20:
+    predicted = "Medium"
+else:
+    predicted = "Low"
+
+
+ngos_suggested = suggest_ngos(predicted)
+
+# Print results
+print("\nPrediction Summary:")
+print(f"→ Surplus: {surplus} meals")
+print(f"→ Surplus Level: {predicted}")
+print(f"→ Recommended NGOs: {', '.join(ngos_suggested) if ngos_suggested else 'No need to donate'}")
+
